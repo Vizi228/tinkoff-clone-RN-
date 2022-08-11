@@ -1,20 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Navigation from './app/navigation/Navigation';
+import { AuthProvider } from './app/providers/AuthProvider';
+import { TailwindProvider } from 'tailwind-rn/dist';
+import utilities from './tailwind.json';
+import { DataProvider } from './app/providers/DataProvider';
+import StoryContainer from './app/components/screens/home/stories/StoryContainer';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <DataProvider>
+        <TailwindProvider utilities={utilities}>
+          <StoryContainer />
+          <Navigation />
+        </TailwindProvider>
+      </DataProvider>
+    </AuthProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
